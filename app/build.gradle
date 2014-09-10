@@ -1,13 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 20
+    compileSdkVersion 'android-L'
     buildToolsVersion "20.0.0"
-
     defaultConfig {
         applicationId "info.nerull7.nap"
         minSdkVersion 14
-        targetSdkVersion 20
+        targetSdkVersion 'L'
         versionCode 1
         versionName "1.0"
     }
@@ -17,9 +16,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile "com.android.support:support-v4:20.0.+"
+    compile 'com.android.support:support-v4:20.0.+'
 }
