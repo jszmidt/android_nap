@@ -43,11 +43,7 @@ public class NotificationHandler {
         PendingIntent pendingIntent = PendingIntent.getService(context, 0, alarmIntent, 0);
 
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        if(Build.VERSION.SDK_INT >= 20){ // Build.VERSION_CODES.L - Doesn't work on L-preview
-            mNotificationManager.notify(notificationID, getNotificationApiL(pendingIntent, getWearableNotificationApiL(pendingIntent)));
-        } else {
-            mNotificationManager.notify(notificationID, getNotification(pendingIntent, getWearableNotification(pendingIntent)));
-        }
+        mNotificationManager.notify(notificationID, getNotification(pendingIntent, getWearableNotification(pendingIntent)));
     }
 
     public void removeNotification(){
@@ -74,39 +70,9 @@ public class NotificationHandler {
         return builder.build();
     }
 
-    @TargetApi(Build.VERSION_CODES.L)
-    private Notification getNotificationApiL(PendingIntent pendingIntent, Notification.Extender extender){
-        Notification.Builder builder = new Notification.Builder(context)
-                .setSmallIcon(NOTIFICATION_ICON)
-                .setContentTitle(context.getResources().getString(R.string.app_name))
-                .setContentText(context.getResources().getString(R.string.start_nap, getNapTime()))
-                .setPriority(priority)
-                .setContentIntent(pendingIntent)
-                .setLocalOnly(localOnly)
-                .setShowWhen(false)
-                .setVisibility(visibility)
-                .setCategory(Notification.CATEGORY_ALARM);
-        if(!localOnly){
-            builder.extend(extender);
-        }
-        return builder.build();
-    }
-
     private NotificationCompat.WearableExtender getWearableNotification(PendingIntent pendingIntent) {
         NotificationCompat.Action action = new NotificationCompat.Action.Builder(NOTIFICATION_ICON_ACTION_WEARABLE, null, pendingIntent).build();
         NotificationCompat.WearableExtender wearable = new NotificationCompat.WearableExtender()
-                .setHintHideIcon(true)
-                .addAction(action)
-                .setContentAction(0)
-                .setContentIntentAvailableOffline(false);
-
-        return wearable;
-    }
-
-    @TargetApi(Build.VERSION_CODES.L)
-    private Notification.WearableExtender getWearableNotificationApiL(PendingIntent pendingIntent){
-        Notification.Action action = new Notification.Action.Builder(NOTIFICATION_ICON_ACTION_WEARABLE, null, pendingIntent).build();
-        Notification.WearableExtender wearable = new Notification.WearableExtender()
                 .setHintHideIcon(true)
                 .addAction(action)
                 .setContentAction(0)
