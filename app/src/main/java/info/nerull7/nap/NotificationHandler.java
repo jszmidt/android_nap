@@ -84,7 +84,8 @@ public class NotificationHandler {
                 .setContentIntent(pendingIntent)
                 .setLocalOnly(localOnly)
                 .setShowWhen(false)
-                .setVisibility(visibility);
+                .setVisibility(visibility)
+                .setCategory(Notification.CATEGORY_ALARM);
         if(!localOnly){
             builder.extend(extender);
         }
