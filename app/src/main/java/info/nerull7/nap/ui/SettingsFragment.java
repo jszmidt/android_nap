@@ -73,6 +73,7 @@ public class SettingsFragment extends PreferenceFragment implements NumberPicker
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(numberPreference, number);
         editor.apply();
+        notificationHandler.publishNotification();
     }
 
     @Override
