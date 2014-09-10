@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="settings_priority_entries">
+        <item>Minimum</item>
+        <item>Low</item>
+        <item>Normal</item>
+        <item>High</item>
+        <item>Maximum</item>
+    </string-array>
+    <string-array name="settings_priority_values">
+        <item>-2</item>
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+</resources>
