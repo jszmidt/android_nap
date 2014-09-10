@@ -40,9 +40,26 @@
             </intent-filter>
         </receiver>
 
+        <service android:name=".dashclock.Extension"
+            android:icon="@drawable/ic_stat_access_alarms"
+            android:label="@string/app_name"
+            android:permission="com.google.android.apps.dashclock.permission.READ_EXTENSION_DATA">
+            <intent-filter>
+                <action android:name="com.google.android.apps.dashclock.Extension" />
+            </intent-filter>
+            <meta-data android:name="protocolVersion" android:value="2"/>
+            <meta-data android:name="worldReadable" android:value="true"/>
+            <meta-data android:name="description" android:value="@string/app_description" />
+        </service>
+
         <service
             android:name=".AlarmIntent"
-            android:exported="false"/>
+            android:exported="false" />
+
+        <provider
+            android:authorities="info.nerull7.nap.settingsprovider"
+            android:name=".dashclock.SettingsContentProvider"
+            android:exported="true"/>
 
     </application>
 

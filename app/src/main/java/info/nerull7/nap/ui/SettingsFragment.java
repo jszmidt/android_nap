@@ -1,6 +1,7 @@
 package info.nerull7.nap.ui;
 
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -87,6 +88,7 @@ public class SettingsFragment extends PreferenceFragment implements NumberPicker
         editor.putInt(numberPreference, number);
         editor.apply();
         notificationHandler.publishNotification();
+        getActivity().getContentResolver().notifyChange(Uri.parse("content://info.nerull7.nap.settingsprovider"), null);
     }
 
     @Override

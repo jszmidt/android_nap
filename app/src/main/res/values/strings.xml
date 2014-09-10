@@ -17,5 +17,7 @@
     <string name="l_settings">Android L settings</string>
     <string name="notification_visibility">Notification Visibility</string>
     <string name="settings_visibility_default">1</string>
+    <string name="app_description">Application for quick starting nap</string>
+    <string name="start_quick_nap">Start quick nap</string>
 
 </resources>
