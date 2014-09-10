@@ -14,5 +14,8 @@
     <string name="take_nap">Take nap</string>
     <string name="enable_android_wear">Android Wear Notification</string>
     <string name="notification">Notification</string>
+    <string name="l_settings">Android L settings</string>
+    <string name="notification_visibility">Notification Visibility</string>
+    <string name="settings_visibility_default">1</string>
 
 </resources>

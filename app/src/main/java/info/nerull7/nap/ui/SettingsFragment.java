@@ -1,6 +1,7 @@
 package info.nerull7.nap.ui;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -25,11 +26,15 @@ public class SettingsFragment extends PreferenceFragment implements NumberPicker
     private String numberPreference;
     private SharedPreferences preferences;
     private NotificationHandler notificationHandler;
+    private ListPreference notificationVisibility;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
+        if(Build.VERSION.SDK_INT >= 20) { // Build.VERSION_CODES.L - Doesn't work on L-preview
+            addPreferencesFromResource(R.xml.settings_l);
+        }
 
         preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         notificationHandler = new NotificationHandler(getActivity());
@@ -55,6 +60,14 @@ public class SettingsFragment extends PreferenceFragment implements NumberPicker
         enableNotification.setOnPreferenceChangeListener(this);
         enableAndroidWear.setOnPreferenceChangeListener(this);
         notificationPriority.setOnPreferenceChangeListener(this);
+
+        // L features
+        if(Build.VERSION.SDK_INT >= 20) { // Build.VERSION_CODES.L - Doesn't work on L-preview
+            notificationVisibility = (ListPreference) findPreference(Settings.NOTIFICATION_VISIBILITY);
+            notificationVisibility.setOnPreferenceChangeListener(this);
+        } else {
+            notificationVisibility = null;
+        }
     }
 
     @Override
@@ -86,6 +99,8 @@ public class SettingsFragment extends PreferenceFragment implements NumberPicker
             }
         } else if(preference == notificationPriority){
             notificationHandler.changePriority(Integer.parseInt((String) o));
+        } else if(preference == notificationVisibility) {
+            notificationHandler.changeVisibility(Integer.parseInt((String) o));
         } else if(preference == enableAndroidWear){
             notificationHandler.changeAndroidWearSupport((Boolean) o);
         } else {

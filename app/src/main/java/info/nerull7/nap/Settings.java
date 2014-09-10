@@ -12,4 +12,6 @@ public class Settings {
     public static final int NAP_TIME_DEFAULT = 30;
     public static final boolean ENABLE_NOTIFICATION_DEFAULT = false;
     public static final String NOTIFICATION_PRIORITY_DEFAULT = "0";
+    public static final String NOTIFICATION_VISIBILITY = "notification_visibility";
+    public static final String NOTIFICATION_VISIBILITY_DEFAULT = "1";
 }

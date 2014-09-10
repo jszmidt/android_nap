@@ -21,12 +21,14 @@ public class NotificationHandler {
 
     private Context context;
     private int priority;
+    private int visibility;
     private boolean localOnly;
 
     public NotificationHandler(Context context) {
         this.context = context;
 
         priority = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(context).getString(Settings.NOTIFICATION_PRIORITY, Settings.NOTIFICATION_PRIORITY_DEFAULT));
+        visibility = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(context).getString(Settings.NOTIFICATION_VISIBILITY, Settings.NOTIFICATION_VISIBILITY_DEFAULT));
         localOnly = !PreferenceManager.getDefaultSharedPreferences(context).getBoolean(Settings.ENABLE_ANDROID_WEAR, true);
     }
 
@@ -82,7 +84,7 @@ public class NotificationHandler {
                 .setContentIntent(pendingIntent)
                 .setLocalOnly(localOnly)
                 .setShowWhen(false)
-                .setVisibility(Notification.VISIBILITY_PUBLIC);
+                .setVisibility(visibility);
         if(!localOnly){
             builder.extend(extender);
         }
@@ -114,6 +116,11 @@ public class NotificationHandler {
 
     public void changeAndroidWearSupport(boolean enable){
         localOnly = !enable;
+        publishNotification();
+    }
+
+    public void changeVisibility(int visibility) {
+        this.visibility = visibility;
         publishNotification();
     }
 }
